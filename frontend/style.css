@@ -15,6 +15,37 @@ h1 {
     margin-bottom: 30px;
 }
 
+#messageBox {
+    margin-bottom: 20px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    display: none;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+.applied {
+    background-color: lightblue;
+}
+
+.interview {
+    background-color: orange;
+}
+
+.rejected {
+    background-color: lightcoral;
+}
+
+.selected {
+    background-color: lightgreen;
+}
+
 section {
     background: white;
     padding: 20px;
@@ -97,4 +128,8 @@ button {
     display: flex;
     gap: 10px;
     margin-top: 10px;
+}
+
+button:hover {
+    opacity: 0.9;
 }

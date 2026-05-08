@@ -14,6 +14,13 @@ function displayApplications(applications) {
 
     container.innerHTML = "";
 
+    if (applications.length === 0) {
+        container.innerHTML = `
+            <p>No applications found.</p>
+        `;
+        return;
+    }
+
     applications.forEach((application) => {
         const card = document.createElement("div");
 
@@ -22,7 +29,12 @@ function displayApplications(applications) {
         card.innerHTML = `
             <h3>${application.company_name}</h3>
             <p><strong>Role:</strong> ${application.role}</p>
-            <p><strong>Status:</strong> ${application.status}</p>
+            <p>
+                <strong>Status:</strong>
+                <span class="status-badge ${application.status.toLowerCase()}">
+                    ${application.status}
+                </span>
+            </p>
             <p><strong>Applied On:</strong> ${application.application_date}</p>
             <p><strong>Notes:</strong> ${application.notes || ""}</p>
             <p><strong>Follow-up:</strong> ${application.follow_up_date || ""}</p>
@@ -78,6 +90,19 @@ document.getElementById("jobForm").addEventListener(
                     body: JSON.stringify(applicationData)
                 }
             );
+            showMessage("Application updated successfully");
+            document.querySelector("button[type='submit']").textContent =
+            "Add Application";
+
+            document.getElementById("searchInput").value = "";
+            document.getElementById("filterStatus").value = "";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+
 
             editApplicationId = null;
 
@@ -92,6 +117,13 @@ document.getElementById("jobForm").addEventListener(
                     body: JSON.stringify(applicationData)
                 }
             );
+            showMessage("Application added successfully");
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+            document.getElementById("searchInput").value = "";
+            document.getElementById("filterStatus").value = "";
         }
 
         fetchApplications();
@@ -102,10 +134,25 @@ document.getElementById("jobForm").addEventListener(
 );
 
 async function deleteApplication(id) {
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this application?"
+    );
+
+    if (!confirmDelete) {
+        return;
+    }
+
     await fetch(`${BASE_URL}/applications/${id}`, {
         method: "DELETE"
     });
 
+    showMessage("Application deleted successfully");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+    
     fetchApplications();
     fetchDashboardStats();
 }
@@ -114,6 +161,15 @@ fetchApplications();
 fetchDashboardStats();
 
 async function editApplication(id) {
+    
+    window.scrollTo({
+                top: 200,
+                behavior: "smooth"
+            });
+
+    document.querySelector("button[type='submit']").textContent =
+    "Update Application";
+
     const response = await fetch(
         `${BASE_URL}/applications/${id}`
     );
@@ -139,6 +195,7 @@ async function editApplication(id) {
         application.follow_up_date || "";
 
     editApplicationId = id;
+
 }   
 
 document.getElementById("searchInput").addEventListener(
@@ -180,3 +237,14 @@ document.getElementById("filterStatus").addEventListener(
         displayApplications(applications);
     }
 );
+
+function showMessage(message) {
+    const messageBox = document.getElementById("messageBox");
+
+    messageBox.textContent = message;
+    messageBox.style.display = "block";
+
+    setTimeout(() => {
+        messageBox.style.display = "none";
+    }, 3000);
+}

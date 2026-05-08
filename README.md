@@ -1,4 +1,5 @@
-# Job Tracker App
+# Job-Tracker App
+>>>>>>> ab8acd7628fd03c926d483336a3316b03e321892
 
 This application helps users track their job applications and organize them efficiently.
 Users can store applications, track follow-up dates, and maintain notes for each application.
@@ -63,6 +64,7 @@ JOBTRACKER/
 
 ### Application Table
 
+<<<<<<< HEAD
 * id
 * company_name
 * role
@@ -86,3 +88,11 @@ Through this project, I aim to improve:
 * Database design with PostgreSQL
 * Frontend integration with backend
 * Deployment and version control
+=======
+Goals:
+Through this project I aim to improve:
+-API development with FastAPI
+-Database design with PostgreSQL
+-Frontend integration with backend
+-Deployment and version control
+>>>>>>> ab8acd7628fd03c926d483336a3316b03e321892

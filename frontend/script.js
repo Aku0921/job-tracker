@@ -140,3 +140,23 @@ async function editApplication(id) {
 
     editApplicationId = id;
 }   
+
+document.getElementById("searchInput").addEventListener(
+    "input",
+    async function () {
+        const keyword = this.value.trim();
+
+        if (keyword === "") {
+            fetchApplications();
+            return;
+        }
+
+        const response = await fetch(
+            `${BASE_URL}/applications/search?keyword=${keyword}`
+        );
+
+        const applications = await response.json();
+
+        displayApplications(applications);
+    }
+);

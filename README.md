@@ -90,3 +90,17 @@ Through this project, I aim to improve:
 * Database design with PostgreSQL
 * Frontend integration with backend
 * Deployment and version control
+
+
+## Live Demo
+
+Frontend: https://job-tracker-frontend-m6ty.onrender.com
+Backend API Docs: https://job-tracker-api-4uuk.onrender.com
+
+## Screenshots
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Applications List
+![Applications List](screenshots/applications-list.png)

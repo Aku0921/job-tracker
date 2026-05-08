@@ -160,3 +160,23 @@ document.getElementById("searchInput").addEventListener(
         displayApplications(applications);
     }
 );
+
+document.getElementById("filterStatus").addEventListener(
+    "change",
+    async function () {
+        const status = this.value;
+
+        if (status === "") {
+            fetchApplications();
+            return;
+        }
+
+        const response = await fetch(
+            `${BASE_URL}/applications?status=${status}`
+        );
+
+        const applications = await response.json();
+
+        displayApplications(applications);
+    }
+);

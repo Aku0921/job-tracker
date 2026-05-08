@@ -74,3 +74,30 @@ def search_applications(db: Session, keyword: str):
         (models.Application.company_name.ilike(f"%{keyword}%")) |
         (models.Application.role.ilike(f"%{keyword}%"))
     ).all()
+
+def get_dashboard_stats(db: Session):
+    total = db.query(models.Application).count()
+
+    applied = db.query(models.Application).filter(
+        models.Application.status == "Applied"
+    ).count()
+
+    interview = db.query(models.Application).filter(
+        models.Application.status == "Interview"
+    ).count()
+
+    rejected = db.query(models.Application).filter(
+        models.Application.status == "Rejected"
+    ).count()
+
+    selected = db.query(models.Application).filter(
+        models.Application.status == "Selected"
+    ).count()
+
+    return {
+        "total": total,
+        "applied": applied,
+        "interview": interview,
+        "rejected": rejected,
+        "selected": selected
+    }

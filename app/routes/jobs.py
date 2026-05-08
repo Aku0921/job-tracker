@@ -17,6 +17,13 @@ def get_db():
     finally:
         db.close()
 
+@router.get(
+    "/dashboard/stats",
+    response_model=schemas.DashboardStats
+)
+def dashboard_stats(db: Session = Depends(get_db)):
+    return crud.get_dashboard_stats(db)
+
 
 @router.post("/applications", response_model=schemas.ApplicationResponse)
 def create_application(

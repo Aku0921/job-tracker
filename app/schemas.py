@@ -25,3 +25,10 @@ class ApplicationUpdate(BaseModel):
     status: Optional[str] = None
     notes: Optional[str] = None
     follow_up_date: Optional[date] = None
+
+class DashboardStats(BaseModel):
+    total: int
+    applied: int
+    interview: int
+    rejected: int
+    selected: int

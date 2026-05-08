@@ -17,3 +17,11 @@ class ApplicationResponse(ApplicationCreate):
 
     class Config:
         from_attributes = True
+
+class ApplicationUpdate(BaseModel):
+    company_name: str
+    role: str
+    application_date: date
+    status: Optional[str] = None
+    notes: Optional[str] = None
+    follow_up_date: Optional[date] = None

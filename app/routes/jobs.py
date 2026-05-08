@@ -47,3 +47,26 @@ def delete_application(application_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Application not found")
 
     return {"message": "Application deleted successfully"}
+
+@router.put(
+    "/applications/{application_id}",
+    response_model=schemas.ApplicationResponse
+)
+def update_application(
+    application_id: int,
+    updated_data: schemas.ApplicationUpdate,
+    db: Session = Depends(get_db)
+):
+    application = crud.update_application(
+        db,
+        application_id,
+        updated_data
+    )
+
+    if not application:
+        raise HTTPException(
+            status_code=404,
+            detail="Application not found"
+        )
+
+    return application

@@ -39,3 +39,27 @@ def delete_application(db: Session, application_id: int):
         db.commit()
 
     return application
+
+def update_application(
+    db: Session,
+    application_id: int,
+    updated_data: schemas.ApplicationUpdate
+):
+    application = db.query(models.Application).filter(
+        models.Application.id == application_id
+    ).first()
+
+    if not application:
+        return None
+
+    application.company_name = updated_data.company_name
+    application.role = updated_data.role
+    application.application_date = updated_data.application_date
+    application.status = updated_data.status
+    application.notes = updated_data.notes
+    application.follow_up_date = updated_data.follow_up_date
+
+    db.commit()
+    db.refresh(application)
+
+    return application

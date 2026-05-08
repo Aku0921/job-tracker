@@ -53,8 +53,12 @@ JOBTRACKER/
 │   │── models.py
 │   │── schemas.py
 │   │── routes/
+|   |   |── jobs.py
 │
 │── frontend/
+|   |── index.html
+|   |── script.js
+|   |── style.css
 │── requirements.txt
 │── README.md
 ```

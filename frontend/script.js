@@ -1,5 +1,7 @@
 const BASE_URL = "http://127.0.0.1:8000";
 
+let editApplicationId = null;
+
 async function fetchApplications() {
     const response = await fetch(`${BASE_URL}/applications`);
     const applications = await response.json();
@@ -26,6 +28,10 @@ function displayApplications(applications) {
             <p><strong>Follow-up:</strong> ${application.follow_up_date || ""}</p>
 
             <div class="action-buttons">
+                <button onclick="editApplication(${application.id})">
+                    Edit
+                </button>
+
                 <button onclick="deleteApplication(${application.id})">
                     Delete
                 </button>
@@ -61,13 +67,32 @@ document.getElementById("jobForm").addEventListener(
             follow_up_date: document.getElementById("follow_up_date").value
         };
 
-        await fetch(`${BASE_URL}/applications`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(applicationData)
-        });
+        if (editApplicationId) {
+            await fetch(
+                `${BASE_URL}/applications/${editApplicationId}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(applicationData)
+                }
+            );
+
+            editApplicationId = null;
+
+        } else {
+            await fetch(
+                `${BASE_URL}/applications`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(applicationData)
+                }
+            );
+        }
 
         fetchApplications();
         fetchDashboardStats();
@@ -87,3 +112,31 @@ async function deleteApplication(id) {
 
 fetchApplications();
 fetchDashboardStats();
+
+async function editApplication(id) {
+    const response = await fetch(
+        `${BASE_URL}/applications/${id}`
+    );
+
+    const application = await response.json();
+
+    document.getElementById("company_name").value =
+        application.company_name;
+
+    document.getElementById("role").value =
+        application.role;
+
+    document.getElementById("application_date").value =
+        application.application_date;
+
+    document.getElementById("status").value =
+        application.status;
+
+    document.getElementById("notes").value =
+        application.notes || "";
+
+    document.getElementById("follow_up_date").value =
+        application.follow_up_date || "";
+
+    editApplicationId = id;
+}   

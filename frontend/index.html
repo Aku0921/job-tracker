@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Job Tracker App</h1>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard">
+        <h2>Dashboard</h2>
+
+        <div class="stats-container">
+            <div class="card">
+                <h3>Total</h3>
+                <p id="total-count">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Applied</h3>
+                <p id="applied-count">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Interview</h3>
+                <p id="interview-count">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Rejected</h3>
+                <p id="rejected-count">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Selected</h3>
+                <p id="selected-count">0</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Application Form -->
+    <section id="application-form">
+        <h2>Add Job Application</h2>
+
+        <form id="jobForm">
+
+            <input
+                type="text"
+                id="company_name"
+                placeholder="Company Name"
+                required
+            >
+
+            <input
+                type="text"
+                id="role"
+                placeholder="Job Role"
+                required
+            >
+
+            <input
+                type="date"
+                id="application_date"
+                required
+            >
+
+            <select id="status">
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Selected">Selected</option>
+            </select>
+
+            <textarea
+                id="notes"
+                placeholder="Notes"
+            ></textarea>
+
+            <input
+                type="date"
+                id="follow_up_date"
+            >
+
+            <button type="submit">
+                Add Application
+            </button>
+
+        </form>
+    </section>
+
+    <!-- Search and Filter -->
+    <section id="search-filter">
+        <h2>Search and Filter</h2>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by company or role"
+        >
+
+        <select id="filterStatus">
+            <option value="">All</option>
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Selected">Selected</option>
+        </select>
+    </section>
+
+    <!-- Applications List -->
+    <section id="applications-list">
+        <h2>Applications</h2>
+
+        <div id="applicationsContainer">
+
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

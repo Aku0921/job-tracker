@@ -55,7 +55,7 @@ JOBTRACKER/
 │   │── routes/
 |   |   |── jobs.py
 │
-│── frontend/
+│── docs/
 |   |── index.html
 |   |── script.js
 |   |── style.css

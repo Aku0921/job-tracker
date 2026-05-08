@@ -1,4 +1,4 @@
-#Job-Tracker App
+# Job-Tracker App
 
 This application helps the user track their job applications and helps organize them. The users are able to store applications, follow-up dates and also maintain notes for each application.
 

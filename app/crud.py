@@ -19,8 +19,13 @@ def create_application(db: Session, application: schemas.ApplicationCreate):
     return db_application
 
 
-def get_applications(db: Session):
-    return db.query(models.Application).all()
+def get_applications(db: Session, status: str = None):
+    query = db.query(models.Application)
+
+    if status:
+        query = query.filter(models.Application.status == status)
+
+    return query.all()
 
 
 def get_application_by_id(db: Session, application_id: int):
@@ -63,3 +68,9 @@ def update_application(
     db.refresh(application)
 
     return application
+
+def search_applications(db: Session, keyword: str):
+    return db.query(models.Application).filter(
+        (models.Application.company_name.ilike(f"%{keyword}%")) |
+        (models.Application.role.ilike(f"%{keyword}%"))
+    ).all()

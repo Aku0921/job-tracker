@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 from ..database import SessionLocal
 from .. import crud, schemas
 
+from typing import Optional
+
 
 router = APIRouter()
 
@@ -25,9 +27,18 @@ def create_application(
 
 
 @router.get("/applications")
-def get_all_applications(db: Session = Depends(get_db)):
-    return crud.get_applications(db)
+def get_all_applications(
+    status: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
+    return crud.get_applications(db, status)
 
+@router.get("/applications/search")
+def search_applications(
+    keyword: str,
+    db: Session = Depends(get_db)
+):
+    return crud.search_applications(db, keyword)
 
 @router.get("/applications/{application_id}")
 def get_application(application_id: int, db: Session = Depends(get_db)):
